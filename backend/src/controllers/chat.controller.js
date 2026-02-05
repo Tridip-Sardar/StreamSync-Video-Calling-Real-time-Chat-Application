@@ -2,8 +2,8 @@ const { generateStreamToken } = require("../lib/stream")
 
 const getStreamToken = async (req, res) => {
     try {
-        const token = generateStreamToken(req.user._id);
-        
+        const token = await generateStreamToken(req.user.id);
+
         res.status(200).json({ token });
     } catch (error) {
         console.log("Error in getStreamToken controller:", error.message);
