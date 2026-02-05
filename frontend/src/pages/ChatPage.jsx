@@ -41,22 +41,20 @@ const ChatPage = () => {
       if (!tokenData?.token || !authUser) return;
 
       try {
-        console.log("Initializing stream chat client...");
-
         const client = StreamChat.getInstance(STREAM_API_KEY);
 
-        await client.connectUser(
-          {
-            id: authUser._id,
-            name: authUser.fullName,
-            image: authUser.profilePic,
-          },
-          tokenData.token
-        );
+        if (!client.userID) {
+          await client.connectUser(
+            {
+              id: authUser._id,
+              name: authUser.fullName,
+              image: authUser.profilePic,
+            },
+            tokenData.token
+          );
+        }
 
-        //
         const channelId = [authUser._id, targetUserId].sort().join("-");
-
         const currChannel = client.channel("messaging", channelId, {
           members: [authUser._id, targetUserId],
         });
@@ -66,8 +64,8 @@ const ChatPage = () => {
         setChatClient(client);
         setChannel(currChannel);
       } catch (error) {
-        console.error("Error initializing chat:", error);
-        toast.error("Could not connect to chat. Please try again.");
+        console.error(error);
+        toast.error("Could not connect to chat.");
       } finally {
         setLoading(false);
       }
@@ -75,6 +73,7 @@ const ChatPage = () => {
 
     initChat();
   }, [tokenData, authUser, targetUserId]);
+
 
   const handleVideoCall = () => {
     if (channel) {
