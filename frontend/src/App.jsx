@@ -75,15 +75,11 @@ function App() {
           }
         ></Route>
         <Route
-          path="/call"
+          path="/call/:id"
           element={
-            isAuthenticated ? (
-              <CallPage></CallPage>
-            ) : (
-              <Navigate to="/login"></Navigate>
-            )
+            isAuthenticated ? <CallPage /> : <Navigate to="/login" />
           }
-        ></Route>
+        />
         <Route
           path="/chat/:id"
           element={
