@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+const mongoose = require("mongoose");
 const app = express();
 const authRoutes = require("./routes/auth.route");
 const usersRoutes = require("./routes/user.route");
@@ -24,6 +25,16 @@ app.use(cookieParser());
 app.use("/api/auth", authRoutes);
 app.use("/api/users", usersRoutes);
 app.use("/api/chat", chatRoutes);
+
+// Lightweight health-check endpoint to keep Render and MongoDB alive
+app.get("/api/health", async (req, res) => {
+  try {
+    await mongoose.connection.db.admin().ping();
+    res.status(200).json({ status: "ok" });
+  } catch (error) {
+    res.status(503).json({ status: "error", message: error.message });
+  }
+});
 
 console.log(__dirname);
 
