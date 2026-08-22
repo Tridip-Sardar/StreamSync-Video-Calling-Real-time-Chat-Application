@@ -19,7 +19,7 @@ Just click **"Login as Guest 1"** or **"Login as Guest 2"** on the login page. B
 
 ## 🚀 Performance & Benchmarks
 
-We recently optimized the backend to improve concurrency and latency by introducing auth caching and connection pooling. See the detailed breakdown here:
+I recently optimized the backend to improve concurrency and latency by introducing auth caching and connection pooling. See the detailed breakdown here:
 👉 [Load Test & Performance Results](benchmarks/load-test-results.md)
 
 ## ⚙️ Setup
