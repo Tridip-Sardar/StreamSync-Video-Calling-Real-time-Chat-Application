@@ -19,7 +19,7 @@ This document outlines the performance optimizations made to the StreamSync back
 |:---------|:--------------:|:-------------:|:------|
 | `GET /api/auth/me` | 10 concurrent | **100 concurrent** | **10x higher ceiling, 22.6x peak throughput** |
 | `GET /api/users` | 25 concurrent | **25 concurrent** | **1.8x peak throughput, 2.3x lower tail latency** |
-| `GET /api/users/friend-requests` | 50 concurrent | **25 concurrent** | **1.2x peak throughput, 2.3x lower tail latency** |
+| `GET /api/users/friend-requests` | 50 concurrent | **25 concurrent** | **1.2x peak throughput, 2.3x lower tail latency**\* |
 
 *\*Note: The ceiling for `friend-requests` dropped from 50 to 25 because the higher baseline throughput caused the throughput-decline threshold to trigger earlier, not because overall performance degraded.*
 
