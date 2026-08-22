@@ -6,7 +6,7 @@ import { completeOnboarding } from "../lib/api";
 import { CameraIcon, LoaderIcon, MapPin, ShipWheelIcon, ShuffleIcon } from "lucide-react";
 import { LANGUAGES } from "../constants";
 
-const OnboardingPage = () => {
+const ProfilePage = () => {
   const { authUser } = useAuthUser();
   const queryClient = useQueryClient();
 
@@ -19,22 +19,20 @@ const OnboardingPage = () => {
     profilePic: authUser?.profilePic || "",
   });
 
-  const { mutate: onboardingMutation, isPending } = useMutation({
-    mutationFn: completeOnboarding,
+  const { mutate: updateProfileMutation, isPending } = useMutation({
+    mutationFn: completeOnboarding, // We can reuse the same API endpoint to update
     onSuccess: () => {
-      toast.success("Profile onboarded successfully");
+      toast.success("Profile updated successfully");
       queryClient.invalidateQueries({ queryKey: ["authUser"] });
     },
-
     onError: (error) => {
-      // Assuming error.response.data exists
       toast.error(error.response?.data?.message || "An error occurred");
     },
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onboardingMutation(formState);
+    updateProfileMutation(formState);
   };
 
   const handleRandomAvatar = () => {
@@ -46,10 +44,10 @@ const OnboardingPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-base-100 flex items-center justify-center p-4">
+    <div className="p-4 sm:p-6 lg:p-8 flex items-center justify-center">
       <div className="card bg-base-200 w-full max-w-3xl shadow-xl">
         <div className="card-body p-6 sm:p-8">
-          <h1 className="text-2xl sm:text-3xl font-bold text-center mb-6">Complete Your Profile</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-center mb-6">Update Your Profile</h1>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* PROFILE PIC CONTAINER */}
@@ -102,7 +100,7 @@ const OnboardingPage = () => {
                 name="bio"
                 value={formState.bio}
                 onChange={(e) => setFormState({ ...formState, bio: e.target.value })}
-                className="textarea w-full h-24" // This is the updated line
+                className="textarea w-full h-24"
                 placeholder="Tell others about yourself and your language learning goals"
               />
             </div>
@@ -174,12 +172,12 @@ const OnboardingPage = () => {
               {!isPending ? (
                 <>
                   <ShipWheelIcon className="size-5 mr-2" />
-                  Complete Onboarding
+                  Update Profile
                 </>
               ) : (
                 <>
                   <LoaderIcon className="animate-spin size-5 mr-2" />
-                  Onboarding...
+                  Updating...
                 </>
               )}
             </button>
@@ -190,4 +188,4 @@ const OnboardingPage = () => {
   );
 };
 
-export default OnboardingPage;
+export default ProfilePage;

@@ -35,7 +35,7 @@ const LoginPage = () => {
           {/* ERROR MESSAGE DISPLAY */}
           {error && (
             <div className="alert alert-error mb-4">
-              <span>{error.response.data.message}</span>
+              <span>{error.response?.data?.message || error.message}</span>
             </div>
           )}
 
@@ -88,6 +88,27 @@ const LoginPage = () => {
                       "Sign In"
                     )}
                   </button>
+
+                  <div className="divider text-sm opacity-50">OR</div>
+
+                  <div className="flex gap-2">
+                    <button
+                      type="button"
+                      className="btn btn-outline flex-1"
+                      disabled={isPending}
+                      onClick={() => loginMutation({ email: "guest1@streamsync.com", password: "guest123" })}
+                    >
+                      Login as Guest 1
+                    </button>
+                    <button
+                      type="button"
+                      className="btn btn-outline flex-1"
+                      disabled={isPending}
+                      onClick={() => loginMutation({ email: "guest2@streamsync.com", password: "guest123" })}
+                    >
+                      Login as Guest 2
+                    </button>
+                  </div>
 
                   <div className="text-center mt-4">
                     <p className="text-sm">

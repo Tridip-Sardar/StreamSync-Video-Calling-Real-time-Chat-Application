@@ -29,8 +29,12 @@ app.use("/api/chat", chatRoutes);
 // Lightweight health-check endpoint to keep Render and MongoDB alive
 app.get("/api/health", async (req, res) => {
   try {
-    await mongoose.connection.db.admin().ping();
-    res.status(200).json({ status: "ok" });
+    if (mongoose.connection.readyState === 1) {
+      await mongoose.connection.db.admin().ping();
+      res.status(200).json({ status: "ok", db: "connected" });
+    } else {
+      res.status(200).json({ status: "ok", db: "disconnected" });
+    }
   } catch (error) {
     res.status(503).json({ status: "error", message: error.message });
   }

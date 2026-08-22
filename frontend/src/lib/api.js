@@ -66,3 +66,13 @@ export async function getStreamToken() {
   const response = await axiosInstance.get("/chat/token");
   return response.data;
 }
+
+export async function unfriendUser(userId) {
+  const response = await axiosInstance.post(`/users/unfriend/${userId}`);
+  return response.data;
+}
+
+export async function blockUser(userId) {
+  const response = await axiosInstance.post(`/users/block/${userId}`);
+  return response.data;
+}
