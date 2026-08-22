@@ -1,5 +1,5 @@
 const express = require("express")
-const protectRoute = require("../middlewares/auth.middleware")
+const { protectRoute } = require("../middlewares/auth.middleware")
 const getStreamToken = require("../controllers/chat.controller")
 
 const router = express.Router()

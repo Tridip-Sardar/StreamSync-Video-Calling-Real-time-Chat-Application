@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 
 .env
+
+interview_reference.md
+load_test_results_streamsync.md

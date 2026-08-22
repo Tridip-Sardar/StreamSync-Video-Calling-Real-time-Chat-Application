@@ -1,5 +1,5 @@
 const express = require("express")
-const protectRoute = require("../middlewares/auth.middleware")
+const { protectRoute } = require("../middlewares/auth.middleware")
 const { getRecommendedUsers, getMyFriends, sendFriendRequest, acceptFriendRequest, getFriendRequests, getOutgoingFriendRequests, unfriendUser, blockUser } = require("../controllers/user.controller")
 
 const router = express.Router()
