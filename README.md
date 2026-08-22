@@ -4,12 +4,7 @@ A full-stack real-time communication platform built with React, Node.js, and Str
 
 ## 🚀 Quick Demo
 
-Two guest accounts are pre-configured so you can instantly test the app without signing up:
-
-| Account | Email | Password |
-|---------|-------|----------|
-| Guest 1 | `guest1@streamsync.com` | `guest123` |
-| Guest 2 | `guest2@streamsync.com` | `guest123` |
+Two guest accounts are pre-configured so you can instantly test the app without signing up.
 
 Just click **"Login as Guest 1"** or **"Login as Guest 2"** on the login page. Both accounts are already friends with each other, so you can immediately test messaging and video calls.
 
